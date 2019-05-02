@@ -25,7 +25,7 @@ socket				= /var/run/mysqld/mysqld.sock
 datadir				= /var/lib/mysql
 general_log			= 0
 general_log_file	= /var/log/mysql/mysql.log
-log_error           = /var/log/mysql/mysql_error.log
+log_error           = stderr
 
 expire_logs_days    = 10
 # By default we only accept connections from localhost
@@ -34,4 +34,4 @@ expire_logs_days    = 10
 symbolic-links		= 0
 
 [mysqld_safe]
-log_error           = /var/log/mysql/mysql_error.log
+log_error           = stderr
