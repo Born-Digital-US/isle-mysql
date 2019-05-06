@@ -31,10 +31,6 @@ ADD https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY
 RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
     rm /tmp/s6-overlay-amd64.tar.gz
 
-## CONFD
-RUN curl -L -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64 && \
-    chmod +x /usr/local/bin/confd && \
-
 RUN chown -R mysql /var/log/mysql
 
 VOLUME /var/lib/mysql
