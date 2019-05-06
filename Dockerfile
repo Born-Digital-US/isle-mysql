@@ -14,7 +14,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0"
 
 ## General Dependencies
-RUN GEN_DEP_PACKS="curl" && \
+RUN GEN_DEP_PACKS="ca-certificates \
+    curl" && \
     echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
     apt-get update && \
     apt-get install --no-install-recommends -y $GEN_DEP_PACKS && \
