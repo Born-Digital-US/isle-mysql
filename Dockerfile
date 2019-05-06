@@ -19,12 +19,13 @@ RUN GEN_DEP_PACKS="ca-certificates \
     echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
     apt-get update && \
     apt-get install --no-install-recommends -y $GEN_DEP_PACKS && \
-    ## CONFD
-    curl -L -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64 && \
-    chmod +x /usr/local/bin/confd && \
     ## Cleanup phase.
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+## CONFD
+RUN curl -L -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64 && \
+    chmod +x /usr/local/bin/confd
 
 ## S6-Overlay @see: https://github.com/just-containers/s6-overlay
 ENV S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION:-1.21.7.0}
@@ -37,3 +38,5 @@ RUN chown -R mysql /var/log/mysql
 VOLUME /var/lib/mysql
 
 COPY rootfs /
+
+CMD ["mysqld"]
