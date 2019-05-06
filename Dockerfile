@@ -13,6 +13,16 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
 
+## S6-Overlay @see: https://github.com/just-containers/s6-overlay
+ENV S6_OVERLAY_VERSION=${S6_OVERLAY_VERSION:-1.21.7.0}
+ADD https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz /tmp/
+RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C / && \
+    rm /tmp/s6-overlay-amd64.tar.gz
+
+## CONFD
+RUN curl -L -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.16.0/confd-0.16.0-linux-amd64 && \
+    chmod +x /usr/local/bin/confd && \
+
 RUN chown -R mysql /var/log/mysql
 
 VOLUME /var/lib/mysql

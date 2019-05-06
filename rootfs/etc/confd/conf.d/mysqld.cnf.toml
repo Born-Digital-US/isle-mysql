@@ -1,0 +1,7 @@
+[template]
+src = "mysql/mysqld.cnf.tpl"
+dest = "/etc/mysql/mysqld.cnf"
+mode = "0644"
+keys = [
+  "/mysql/general/log"
+]
